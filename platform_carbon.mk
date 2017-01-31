@@ -20,3 +20,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.HAL3.enabled=0 \
     media.stagefright.less-secure=true \
     media.stagefright.legacyencoder=true
+
+# aptX HD
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bt.enableAptXHD=true
