@@ -13,3 +13,5 @@
 # limitations under the License.
 
 include device/sony/common/CommonConfigCarbon.mk
+
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
