@@ -14,3 +14,9 @@
 
 # Inherit Carbon common device parts
 $(call inherit-product, device/sony/common/common_carbon.mk)
+
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.HAL3.enabled=0 \
+    media.stagefright.less-secure=true \
+    media.stagefright.legacyencoder=true
