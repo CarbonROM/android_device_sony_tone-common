@@ -17,6 +17,7 @@ PLATFORM_COMMON_PATH := device/sony/tone-common
 
 $(call inherit-product, device/sony/common/common.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 SOMC_PLATFORM := tone
 
@@ -26,7 +27,6 @@ SONY_ROOT := $(PLATFORM_COMMON_PATH)/rootdir
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
     $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(SONY_ROOT)/system/etc/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(SONY_ROOT)/system/etc/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml
@@ -46,11 +46,6 @@ PRODUCT_COPY_FILES += \
 # RQBalance-PowerHAL configuration
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/rqbalance_config.xml:system/etc/rqbalance_config.xml
-
-# WLAN
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/etc/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-    $(SONY_ROOT)/system/etc/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 # Device Specific Hardware
 PRODUCT_COPY_FILES += \
@@ -138,8 +133,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.wrist_tilt=false \
     ro.qti.sensors.pug=false \
     ro.qti.sensors.iod=false \
+    ro.qti.sensors.als_scale=1 \
     ro.qfusion_use_report_period=false
 
 # USB controller setup
 PRODUCT_PROPERTY_OVERRIDES += \
-    sys.usb.controller=6a00000.dwc3
+    sys.usb.controller=6a00000.dwc3 \
+    sys.usb.rndis.func.name=rndis_bam
