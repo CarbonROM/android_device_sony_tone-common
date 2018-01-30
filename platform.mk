@@ -23,10 +23,17 @@ SOMC_PLATFORM := tone
 
 SONY_ROOT := $(PLATFORM_COMMON_PATH)/rootdir
 
-# Media
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(PLATFORM_COMMON_PATH)/overlay
+
+# Audio
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
-    $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml
+
+# Media
+PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(SONY_ROOT)/system/etc/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml
@@ -54,13 +61,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
-# Overlay
-DEVICE_PACKAGE_OVERLAYS += \
-    $(PLATFORM_COMMON_PATH)/overlay
-
-# Platform Init
+# Platform power configuration
 PRODUCT_PACKAGES += \
-    fstab.tone \
     init.tone.pwr
 
 # Audio
@@ -89,6 +91,10 @@ PRODUCT_PACKAGES += \
 # OpenGLES Nougat version
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
+
+# Fluence
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.fluencetype=fluence
 
 # aDSP sensors
 ## max rate
